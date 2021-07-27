@@ -1,10 +1,10 @@
 import React from 'react';
 import { Table, TableContainer, TableBody, TableRow, TableHead, TableCell, Paper } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { isNil } from 'lodash';
 import { useHistory } from 'react-router-dom';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     'users-table--heading': {
       fontWeight: 'bold',

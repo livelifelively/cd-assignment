@@ -35,13 +35,19 @@ export const PersonalInfo = ({ user }: { user: User }) => {
         Username: <span>{user?.username}</span>
       </div>
       <div>
-        Email: <span className={classes.highlightedText}>{user?.email}</span>
+        {'Email: '}
+        <a href={`mailto:${user?.email}`} className={classes.highlightedText}>
+          {user?.email}
+        </a>
       </div>
       <div>
         Phone: <span className={classes.highlightedText}>{user?.phone}</span>
       </div>
       <div>
-        Website: <span className={classes.highlightedText}>{user?.website}</span>
+        {'Website: '}
+        <a href={`http://${user?.website}`} target="_blank" className={classes.highlightedText} rel="noreferrer">
+          {user?.website}
+        </a>
       </div>
     </div>
   );

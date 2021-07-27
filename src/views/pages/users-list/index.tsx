@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { MenuItem, Select, FormControl, InputLabel, TextField, Grid } from '@material-ui/core';
+import { FormControl, TextField, Grid } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     selectEmpty: {
       marginTop: theme.spacing(2),
+    },
+    'users-list__controls': {
+      textAlign: 'right',
     },
   })
 );
@@ -98,27 +101,45 @@ const UsersList = () => {
 
   return (
     <DefaultLayout>
-      <Grid container>
-        <Grid item xs={12}>
-          <h2>Users list</h2>
+      <Grid container alignItems="center" spacing={3}>
+        <Grid item xs={12} sm={6}>
+          <h1>Users</h1>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField label="Search" variant="outlined" onChange={onSearchTextChange} />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FormControl className={classes.formControl}>
-            <InputLabel>Sort Users</InputLabel>
-            <Select
-              value={sortUsersBy}
-              onChange={(e: any) => {
-                setSortUsersBy(e.target.value);
-              }}
-            >
-              <MenuItem value="name">Name</MenuItem>
-              <MenuItem value="username">Username</MenuItem>
-              <MenuItem value="email">Email</MenuItem>
-            </Select>
-          </FormControl>
+          <div className={classes['users-list__controls']}>
+            <TextField
+              label="Search"
+              variant="outlined"
+              onChange={onSearchTextChange}
+              style={{ margin: 8 }}
+              size="small"
+            />
+            <FormControl className={classes.formControl}>
+              <TextField
+                select
+                label="Sort Users"
+                value={sortUsersBy}
+                onChange={(e: any) => {
+                  setSortUsersBy(e.target.value);
+                }}
+                SelectProps={{
+                  native: true,
+                }}
+                variant="outlined"
+                size="small"
+              >
+                <option key="name" value="name">
+                  Name
+                </option>
+                <option key="username" value="username">
+                  Username
+                </option>
+                <option key="email" value="email">
+                  Email
+                </option>
+              </TextField>
+            </FormControl>
+          </div>
         </Grid>
         <Grid item xs={12}>
           <UsersTable sortedUsers={sortedUsers} searchQuery={usersSearchResults?.searchString} />
